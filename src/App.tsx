@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import CheckBox from './components/CheckBox'
 import Header from './components/Header'
+import utilStyles from './styles/utils.module.css'
 
 type Prefectures = {
   prefCode: number
@@ -28,7 +29,7 @@ const App = () => {
       <div className="App">
         <Header />
         <main>
-          <h2>都道府県</h2>
+          <h2 className={utilStyles.headingM}>都道府県</h2>
           {prefectures &&
             prefectures.map((prefecture) => (
               <CheckBox key={prefecture.prefCode} label={prefecture.prefName} />

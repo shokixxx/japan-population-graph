@@ -14,3 +14,4 @@
 |タグ|name|px|weight|line-height|rem|
 | --- | --- | --- | --- | --- | --- |
 |`h1`|headingL|36px|Regular|1.4|2.25
+|`h2`|headingM|32px|Regular|1.5|2

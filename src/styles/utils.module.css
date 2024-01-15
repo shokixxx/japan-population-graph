@@ -1,5 +1,11 @@
 .headingL {
   font-size: 2.25rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.headingM {
+  font-size: 2rem;
   line-height: 1.5;
   font-weight: 400;
 }
