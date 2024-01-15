@@ -29,7 +29,9 @@ const App = () => {
       <div className="App">
         <Header />
         <main>
-          <h2 className={utilStyles.headingM}>都道府県</h2>
+          <h2 className={`${utilStyles.headingM} ${utilStyles.headingBox}`}>
+            都道府県
+          </h2>
           {prefectures &&
             prefectures.map((prefecture) => (
               <CheckBox key={prefecture.prefCode} label={prefecture.prefName} />
