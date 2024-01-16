@@ -1,0 +1,9 @@
+.container {
+  margin: 0 100px;
+  max-width: 1200px;
+}
+
+.prefecture {
+  display: flex;
+  flex-flow: row wrap;
+}
