@@ -17,3 +17,14 @@
   padding: 0.5rem;
   width: fit-content;
 }
+
+.textL {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.checkBox {
+  margin-right: 3px;
+  transform: scale(1.4);
+}

@@ -15,3 +15,4 @@
 | --- | --- | --- | --- | --- | --- |
 |`h1`|headingL|36px|Regular|1.4|2.25
 |`h2`|headingM|32px|Regular|1.5|2
+|`本文`|textL|20px|Regular|1.7|1.25
