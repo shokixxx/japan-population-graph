@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { getPrefectures } from './api/api'
 import CheckBox from './components/CheckBox'
 import Header from './components/Header'
 import layout from './styles/layout.module.css'
@@ -14,16 +15,11 @@ const App = () => {
   const [prefectures, setPrefectures] = useState<Prefectures[]>([])
 
   useEffect(() => {
-    const getPrefectures = async () => {
-      await fetch('https://opendata.resas-portal.go.jp/api/v1/prefectures', {
-        headers: {
-          'X-API-KEY': `${process.env.REACT_APP_API_X_API_KEY}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((prefecture) => setPrefectures(prefecture.result))
+    const getPrefecturesData = async () => {
+      const prefecturesData = await getPrefectures()
+      prefecturesData && setPrefectures(prefecturesData)
     }
-    getPrefectures()
+    getPrefecturesData()
   }, [])
   return (
     <>
