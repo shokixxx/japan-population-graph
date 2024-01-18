@@ -13,6 +13,7 @@ type Prefectures = {
 
 const App = () => {
   const [prefectures, setPrefectures] = useState<Prefectures[]>([])
+  const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([])
 
   useEffect(() => {
     const getPrefecturesData = async () => {
@@ -21,6 +22,19 @@ const App = () => {
     }
     getPrefecturesData()
   }, [])
+
+  const handleCheckBoxChange = (prefCode: number, isChecked: boolean) => {
+    setSelectedPrefCodes((prevSelectedPrefCodes) => {
+      if (isChecked) {
+        return [...prevSelectedPrefCodes, prefCode]
+      } else {
+        return prevSelectedPrefCodes.filter(
+          (prevSelectedPrefCode) => prevSelectedPrefCode !== prefCode
+        )
+      }
+    })
+  }
+
   return (
     <>
       <Header />
@@ -34,7 +48,10 @@ const App = () => {
               prefectures.map((prefecture) => (
                 <CheckBox
                   key={prefecture.prefCode}
-                  label={prefecture.prefName}
+                  prefCode={prefecture.prefCode}
+                  prefName={prefecture.prefName}
+                  isChecked={selectedPrefCodes.includes(prefecture.prefCode)}
+                  onChange={handleCheckBoxChange}
                 />
               ))}
           </div>

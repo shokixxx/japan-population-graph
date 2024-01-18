@@ -1,15 +1,27 @@
 import utilStyles from '../styles/utils.module.css'
 
 type CheckBoxProps = {
-  label: string
+  prefCode: number
+  prefName: string
+  isChecked: boolean
+  onChange: (prefCode: number, checked: boolean) => void
 }
 
 const CheckBox = (checkBoxProps: CheckBoxProps) => {
-  const { label } = checkBoxProps
+  const { prefCode, prefName, isChecked, onChange } = checkBoxProps
+  const handleCheckBoxChange = () => {
+    onChange(prefCode, !isChecked)
+  }
+
   return (
     <label className={utilStyles.textL}>
-      <input type="checkbox" value={label} className={utilStyles.checkBox} />
-      {label}
+      <input
+        type="checkbox"
+        className={utilStyles.checkBox}
+        value={prefName}
+        onChange={handleCheckBoxChange}
+      />
+      {prefName}
     </label>
   )
 }
