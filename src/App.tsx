@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { getPrefectures } from './api/api'
+import { getPopulationCompositionByPrefectures, getPrefectures } from './api/api'
 import CheckBox from './components/CheckBox'
 import Header from './components/Header'
 import layout from './styles/layout.module.css'
@@ -11,9 +11,20 @@ type Prefectures = {
   prefName: string
 }
 
+type PopulationDataByPrefectures = {
+  label: string
+  data: {
+    year: number
+    value: number
+    rate: number
+  }[]
+}
+
 const App = () => {
   const [prefectures, setPrefectures] = useState<Prefectures[]>([])
   const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([])
+  const [populationDataByPrefectures, setPopulationDataByPrefectures] =
+    useState<PopulationDataByPrefectures[]>([])
 
   useEffect(() => {
     const getPrefecturesData = async () => {
@@ -34,6 +45,23 @@ const App = () => {
       }
     })
   }
+
+  useEffect(() => {
+    const getPopulationCompositionByPrefecturesData = async () => {
+      if (selectedPrefCodes.length > 0) {
+        const promises = selectedPrefCodes.map((prefCode) =>
+          getPopulationCompositionByPrefectures(prefCode)
+        )
+        try {
+          const populationDataByPrefecturesData = await Promise.all(promises)
+          setPopulationDataByPrefectures(populationDataByPrefecturesData)
+        } catch (error) {
+          alert('人口構成データの取得処理に失敗しました')
+        }
+      }
+    }
+    getPopulationCompositionByPrefecturesData()
+  }, [selectedPrefCodes])
 
   return (
     <>
