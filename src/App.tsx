@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { getPopulationCompositionByPrefectures, getPrefectures } from './api/api'
 import CheckBox from './components/CheckBox'
 import Header from './components/Header'
+import PopulationChart from './components/PopulationChart'
 import layout from './styles/layout.module.css'
 import utilStyles from './styles/utils.module.css'
 
@@ -11,7 +12,7 @@ type Prefectures = {
   prefName: string
 }
 
-type PopulationDataByPrefectures = {
+export type PopulationDataByPrefectures = {
   label: string
   data: {
     year: number
@@ -25,6 +26,9 @@ const App = () => {
   const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([])
   const [populationDataByPrefectures, setPopulationDataByPrefectures] =
     useState<PopulationDataByPrefectures[]>([])
+
+  // TODO:選択できるよう修正
+  const selectedPopulationComposition = '総人口'
 
   useEffect(() => {
     const getPrefecturesData = async () => {
@@ -83,6 +87,10 @@ const App = () => {
                 />
               ))}
           </div>
+          <PopulationChart
+            populationDataByPrefectures={populationDataByPrefectures}
+            selectedPopulationComposition={selectedPopulationComposition}
+          />
         </main>
       </div>
     </>
