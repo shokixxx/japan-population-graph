@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react'
 import { getPopulationCompositionByPrefectures, getPrefectures } from './api/api'
 import CheckBox from './components/CheckBox'
 import Header from './components/Header'
-import PopulationChart from './components/PopulationChart'
+// import PopulationChart from './components/PopulationChart'
 import layout from './styles/layout.module.css'
 import utilStyles from './styles/utils.module.css'
 
-type Prefectures = {
+export type Prefectures = {
   prefCode: number
   prefName: string
 }
@@ -23,12 +23,7 @@ export type PopulationDataByPrefectures = {
 
 const App = () => {
   const [prefectures, setPrefectures] = useState<Prefectures[]>([])
-  const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([])
-  const [populationDataByPrefectures, setPopulationDataByPrefectures] =
-    useState<PopulationDataByPrefectures[]>([])
-
-  // TODO:選択できるよう修正
-  const selectedPopulationComposition = '総人口'
+  const [selectedPrefData, setSelectedPrefData] = useState<Prefectures[]>([])
 
   useEffect(() => {
     const getPrefecturesData = async () => {
@@ -38,34 +33,21 @@ const App = () => {
     getPrefecturesData()
   }, [])
 
-  const handleCheckBoxChange = (prefCode: number, isChecked: boolean) => {
-    setSelectedPrefCodes((prevSelectedPrefCodes) => {
+  const handleCheckBoxChange = (
+    prefCode: number,
+    prefName: string,
+    isChecked: boolean
+  ) => {
+    setSelectedPrefData((prevSelectedPrefData) => {
       if (isChecked) {
-        return [...prevSelectedPrefCodes, prefCode]
+        return [...prevSelectedPrefData, { prefCode, prefName }]
       } else {
-        return prevSelectedPrefCodes.filter(
-          (prevSelectedPrefCode) => prevSelectedPrefCode !== prefCode
+        return prevSelectedPrefData.filter(
+          (prevSelectedPref) => prevSelectedPref.prefCode !== prefCode
         )
       }
     })
   }
-
-  useEffect(() => {
-    const getPopulationCompositionByPrefecturesData = async () => {
-      if (selectedPrefCodes.length > 0) {
-        const promises = selectedPrefCodes.map((prefCode) =>
-          getPopulationCompositionByPrefectures(prefCode)
-        )
-        try {
-          const populationDataByPrefecturesData = await Promise.all(promises)
-          setPopulationDataByPrefectures(populationDataByPrefecturesData)
-        } catch (error) {
-          alert('人口構成データの取得処理に失敗しました')
-        }
-      }
-    }
-    getPopulationCompositionByPrefecturesData()
-  }, [selectedPrefCodes])
 
   return (
     <>
@@ -82,15 +64,17 @@ const App = () => {
                   key={prefecture.prefCode}
                   prefCode={prefecture.prefCode}
                   prefName={prefecture.prefName}
-                  isChecked={selectedPrefCodes.includes(prefecture.prefCode)}
+                  isChecked={selectedPrefData
+                    .map((pref) => pref.prefCode)
+                    .includes(prefecture.prefCode)}
                   onChange={handleCheckBoxChange}
                 />
               ))}
           </div>
-          <PopulationChart
+          {/* <PopulationChart
             populationDataByPrefectures={populationDataByPrefectures}
             selectedPopulationComposition={selectedPopulationComposition}
-          />
+          /> */}
         </main>
       </div>
     </>

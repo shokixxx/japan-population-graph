@@ -4,13 +4,13 @@ type CheckBoxProps = {
   prefCode: number
   prefName: string
   isChecked: boolean
-  onChange: (prefCode: number, checked: boolean) => void
+  onChange: (prefCode: number, prefName: string, checked: boolean) => void
 }
 
 const CheckBox = (checkBoxProps: CheckBoxProps) => {
   const { prefCode, prefName, isChecked, onChange } = checkBoxProps
   const handleCheckBoxChange = () => {
-    onChange(prefCode, !isChecked)
+    onChange(prefCode, prefName, !isChecked)
   }
 
   return (
