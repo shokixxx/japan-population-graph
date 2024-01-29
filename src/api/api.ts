@@ -30,8 +30,8 @@ export const getPrefectures = async () => {
 /**
  * 都道府県コードに紐づく人口構成データを返します
  * @returns PopulationCompositionByPrefectures[] 都道府県別人口構成データの配列
- * @property label 人口データ種類
- * @property data[] {year:年 value:人口 rate:割合(labelが総人口の場合、存在しない)}
+ * @property boundaryYear 推計値の区切り年
+ * @property data[] {label: 人口データ種類 data[]:{year:年 value:人口 rate:割合(labelが総人口の場合、存在しない)}
  */
 export const getPopulationCompositionByPrefectures = async (
   prefCode: number
@@ -47,7 +47,7 @@ export const getPopulationCompositionByPrefectures = async (
     )
 
     const populationCompositionByPrefecturesData = await response.json()
-    return populationCompositionByPrefecturesData.result.data
+    return populationCompositionByPrefecturesData.result
   } catch (error) {
     alert('人口構成データの取得に失敗しました')
     throw error
