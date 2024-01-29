@@ -56,15 +56,20 @@ const App = () => {
               prefectures.map((prefecture) => (
                 <CheckBox
                   key={prefecture.prefCode}
-                  prefCode={prefecture.prefCode}
-                  prefName={prefecture.prefName}
+                  label={prefecture.prefName}
                   isChecked={selectedPrefecturesData
                     .map(
                       (selectedPrefectureData) =>
                         selectedPrefectureData.prefCode
                     )
                     .includes(prefecture.prefCode)}
-                  onChange={handleCheckBoxChange}
+                  onChange={(checked) =>
+                    handleCheckBoxChange(
+                      prefecture.prefCode,
+                      prefecture.prefName,
+                      checked
+                    )
+                  }
                 />
               ))}
           </div>
