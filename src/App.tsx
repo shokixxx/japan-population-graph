@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { getPopulationCompositionByPrefectures, getPrefectures } from './api/api'
+import { getPrefectures } from './api/api'
 import CheckBox from './components/CheckBox'
 import Header from './components/Header'
 import PopulationChart from './components/PopulationChart'
@@ -51,7 +51,7 @@ const App = () => {
           <h2 className={`${utilStyles.headingM} ${utilStyles.headingBox}`}>
             都道府県
           </h2>
-          <div className={layout.prefecture}>
+          <div className={layout.checkBox}>
             {prefectures &&
               prefectures.map((prefecture) => (
                 <CheckBox
