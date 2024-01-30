@@ -10,7 +10,7 @@ export const getPrefectures = async () => {
       'https://opendata.resas-portal.go.jp/api/v1/prefectures',
       {
         headers: {
-          'X-API-KEY': `${process.env.NEXT_PUBLIC_X_API_KEY}`,
+          'X-API-KEY': `${process.env.X_API_KEY}`,
         },
       }
     )
@@ -41,7 +41,7 @@ export const getPopulationCompositionByPrefectures = async (
       `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefCode}`,
       {
         headers: {
-          'X-API-KEY': `${process.env.NEXT_PUBLIC_X_API_KEY}`,
+          'X-API-KEY': `${process.env.X_API_KEY}`,
         },
       }
     )
