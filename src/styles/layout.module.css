@@ -3,6 +3,13 @@
   max-width: 1200px;
 }
 
+.header {
+  background-color: #0017c1;
+  color: #fff;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .checkBoxMenu {
   padding: 0.25rem;
 }

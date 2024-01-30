@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { getPrefectures } from './api/api'
-import CheckBox from './components/CheckBox'
-import Header from './components/Header'
-import PopulationChart from './components/PopulationChart'
-import layout from './styles/layout.module.css'
-import utilStyles from './styles/utils.module.css'
+import { getPrefectures } from '../api/api'
+import layout from '../styles/layout.module.css'
+import utilStyles from '../styles/utils.module.css'
+import CheckBox from './CheckBox'
+import Header from './Header'
+import PopulationChart from './PopulationChart'
 
 export type Prefectures = {
   prefCode: number

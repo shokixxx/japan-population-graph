@@ -4,9 +4,9 @@ import {
 } from 'recharts'
 
 import { getPopulationCompositionByPrefectures } from '../api/api'
-import { Prefectures } from '../App'
 import layout from '../styles/layout.module.css'
 import CheckBox from './CheckBox'
+import { Prefectures } from './Layout'
 
 type PopulationChartProps = {
   selectedPrefecturesData: Prefectures[]
