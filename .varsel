@@ -1,0 +1,13 @@
+{
+  "deployments": {
+    "production": {
+      "script": "yarn next build",
+      "branch": "main"
+    },
+    "staging": {
+      "script": "yarn next build",
+      "remote": "your-staging-server",
+      "branch": "develop"
+    }
+  }
+}
