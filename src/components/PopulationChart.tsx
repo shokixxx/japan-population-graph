@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+import {
+  CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis
+} from 'recharts'
 
 import { getPopulationCompositionByPrefectures } from '../api/api'
 import { Prefectures } from '../App'
+import layout from '../styles/layout.module.css'
 import CheckBox from './CheckBox'
 
 type PopulationChartProps = {
@@ -64,53 +67,53 @@ const PopulationChart: React.FC<PopulationChartProps> = ({
 
   return (
     <>
-      {uniquePopulationCompositions?.map((composition, index) => (
-        <CheckBox
-          key={index}
-          label={composition}
-          isChecked={composition === selectedPopulationComposition}
-          onChange={(checked) => {
-            if (checked) {
-              setSelectedPopulationComposition(composition)
-            }
-          }}
-        />
-      ))}
-      <LineChart
-        width={1000}
-        height={400}
-        margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="year" allowDuplicatedCategory={false} />
-        <YAxis dataKey="value" width={100} />
-        <Tooltip />
-        <Legend />
-        {populationDataByPrefecturesData?.length ===
-        selectedPrefecturesData.length
-          ? populationDataByPrefecturesData.map((populationData, index) => {
-              const selectedPopulationData = populationData.data.find(
-                (c) => c.label === selectedPopulationComposition
-              )?.data
-
-              if (selectedPopulationData) {
-                return (
-                  <Line
-                    key={index}
-                    type="monotone"
-                    dataKey="value"
-                    name={selectedPrefecturesData[index].prefName}
-                    data={selectedPopulationData}
-                    stroke={`hsl(${
-                      selectedPrefecturesData[index].prefCode +
-                      Math.floor(Math.random() * 101)
-                    }, 50%, 50%)`}
-                  />
-                )
+      <div className={layout.populationComposition}>
+        {uniquePopulationCompositions?.map((composition, index) => (
+          <CheckBox
+            key={index}
+            label={composition}
+            isChecked={composition === selectedPopulationComposition}
+            onChange={(checked) => {
+              if (checked) {
+                setSelectedPopulationComposition(composition)
               }
-            })
-          : null}
-      </LineChart>
+            }}
+          />
+        ))}
+      </div>
+      <ResponsiveContainer width="100%" height={400} minWidth={300}>
+        <LineChart margin={{ top: 20, right: 30, left: 20, bottom: 10 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="year" allowDuplicatedCategory={false} />
+          <YAxis dataKey="value" width={70} />
+          <Tooltip />
+          <Legend />
+          {populationDataByPrefecturesData?.length ===
+          selectedPrefecturesData.length
+            ? populationDataByPrefecturesData.map((populationData, index) => {
+                const selectedPopulationData = populationData.data.find(
+                  (c) => c.label === selectedPopulationComposition
+                )?.data
+
+                if (selectedPopulationData) {
+                  return (
+                    <Line
+                      key={index}
+                      type="monotone"
+                      dataKey="value"
+                      name={selectedPrefecturesData[index].prefName}
+                      data={selectedPopulationData}
+                      stroke={`hsl(${
+                        selectedPrefecturesData[index].prefCode +
+                        Math.floor(Math.random() * 101)
+                      }, 50%, 50%)`}
+                    />
+                  )
+                }
+              })
+            : null}
+        </LineChart>
+      </ResponsiveContainer>
     </>
   )
 }

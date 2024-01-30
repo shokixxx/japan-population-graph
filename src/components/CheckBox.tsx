@@ -1,3 +1,4 @@
+import layout from '../styles/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 
 type CheckBoxProps = {
@@ -13,7 +14,7 @@ const CheckBox = (checkBoxProps: CheckBoxProps) => {
   }
 
   return (
-    <label className={utilStyles.textL}>
+    <label className={`${layout.checkBoxMenu} ${utilStyles.textL}`}>
       <input
         type="checkbox"
         className={utilStyles.checkBox}

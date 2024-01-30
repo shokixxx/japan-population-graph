@@ -3,7 +3,17 @@
   max-width: 1200px;
 }
 
+.checkBoxMenu {
+  padding: 0.25rem;
+}
+
 .prefecture {
   display: flex;
   flex-flow: row wrap;
+}
+
+.populationComposition {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }

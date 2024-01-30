@@ -51,7 +51,7 @@ const App = () => {
           <h2 className={`${utilStyles.headingM} ${utilStyles.headingBox}`}>
             都道府県
           </h2>
-          <div className={layout.checkBox}>
+          <div className={layout.prefecture}>
             {prefectures &&
               prefectures.map((prefecture) => (
                 <CheckBox
