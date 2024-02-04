@@ -4,7 +4,7 @@
  * @property prefCode 都道府県コード
  * @property prefName 都道府県名
  */
-export const getPrefectures = async () => {
+export const getPrefectures = async (apiKey: string | undefined) => {
   try {
     const response = await fetch(
       'https://opendata.resas-portal.go.jp/api/v1/prefectures',

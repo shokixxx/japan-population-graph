@@ -3,13 +3,13 @@ import {
   CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis
 } from 'recharts'
 
-import { getPopulationCompositionByPrefectures } from '../api/api'
+import { getPopulationCompositionByPrefectures } from '../pages/api/api'
+import { Prefecture } from '../pages/api/prefecture'
 import layout from '../styles/layout.module.css'
 import CheckBox from './CheckBox'
-import { Prefectures } from './Layout'
 
 type PopulationChartProps = {
-  selectedPrefecturesData: Prefectures[]
+  selectedPrefecturesData: Prefecture[]
 }
 
 type PopulationComposition = {
