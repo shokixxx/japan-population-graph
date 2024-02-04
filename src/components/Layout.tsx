@@ -1,28 +1,32 @@
 import { useEffect, useState } from 'react'
 
-import { getPrefectures } from '../api/api'
+import { Prefecture } from '../pages/api/prefecture'
 import layout from '../styles/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import CheckBox from './CheckBox'
 import Header from './Header'
 import PopulationChart from './PopulationChart'
 
-export type Prefectures = {
-  prefCode: number
-  prefName: string
-}
-
 const App = () => {
-  const [prefectures, setPrefectures] = useState<Prefectures[]>([])
+  const [prefectures, setPrefectures] = useState<Prefecture[]>([])
   const [selectedPrefecturesData, setSelectedPrefecturesData] = useState<
-    Prefectures[]
+    Prefecture[]
   >([])
 
   useEffect(() => {
     const getPrefecturesData = async () => {
-      const prefecturesData = await getPrefectures()
-      prefecturesData && setPrefectures(prefecturesData)
+      try {
+        const response = await fetch('/api/prefecture')
+        if (!response.ok) {
+          throw new Error('Failed to fetch data')
+        }
+        const prefecturesData = await response.json()
+        prefecturesData && setPrefectures(prefecturesData)
+      } catch (error) {
+        console.error(error)
+      }
     }
+
     getPrefecturesData()
   }, [])
 
