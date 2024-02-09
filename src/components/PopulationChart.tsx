@@ -3,7 +3,7 @@ import {
   CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis
 } from 'recharts'
 
-import { getPopulationCompositionByPrefectures } from '../pages/api/api'
+import { PopulationCompositionByPrefectures } from '../pages/api/population/[prefCode]'
 import { Prefecture } from '../pages/api/prefecture'
 import layout from '../styles/layout.module.css'
 import CheckBox from './CheckBox'
@@ -12,31 +12,24 @@ type PopulationChartProps = {
   selectedPrefecturesData: Prefecture[]
 }
 
-type PopulationComposition = {
-  boundaryYear: number
-  data: PopulationDataByPrefectures[]
-}
-
-type PopulationDataByPrefectures = {
-  label: string
-  data: {
-    year: number
-    value: number
-    rate: number
-  }[]
-}
-
 const PopulationChart: React.FC<PopulationChartProps> = ({
   selectedPrefecturesData,
 }) => {
   const [populationDataByPrefecturesData, setPopulationDataByPrefecturesData] =
-    useState<PopulationComposition[]>([])
+    useState<PopulationCompositionByPrefectures[]>([])
 
   useEffect(() => {
     const getPopulationCompositionByPrefecturesData = async () => {
       if (selectedPrefecturesData.length > 0) {
         const promises = selectedPrefecturesData.map((selectedPrefectureData) =>
-          getPopulationCompositionByPrefectures(selectedPrefectureData.prefCode)
+          fetch(`/api/population/${selectedPrefectureData.prefCode}`).then(
+            (response) => {
+              if (!response.ok) {
+                throw new Error('Failed to fetch data')
+              }
+              return response.json()
+            }
+          )
         )
         try {
           const resolvedData = await Promise.all(promises)
@@ -46,7 +39,6 @@ const PopulationChart: React.FC<PopulationChartProps> = ({
         }
       }
     }
-
     getPopulationCompositionByPrefecturesData()
   }, [selectedPrefecturesData])
 
