@@ -36,16 +36,14 @@ const App = () => {
     prefName: string,
     isChecked: boolean
   ) => {
-    setSelectedPrefecturesData((prevSelectedPrefecturesData) => {
-      if (isChecked) {
-        return [...prevSelectedPrefecturesData, { prefCode, prefName }]
-      } else {
-        return prevSelectedPrefecturesData.filter(
-          (prevSelectedPrefectureData) =>
-            prevSelectedPrefectureData.prefCode !== prefCode
-        )
-      }
-    })
+    setSelectedPrefecturesData((prevSelectedPrefecturesData) =>
+      isChecked
+        ? [...prevSelectedPrefecturesData, { prefCode, prefName }]
+        : prevSelectedPrefecturesData.filter(
+            (prevSelectedPrefectureData) =>
+              prevSelectedPrefectureData.prefCode !== prefCode
+          )
+    )
   }
 
   return (
