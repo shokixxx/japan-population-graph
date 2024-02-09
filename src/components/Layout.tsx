@@ -14,20 +14,21 @@ const App = () => {
   >([])
 
   useEffect(() => {
-    const getPrefecturesData = async () => {
+    const fetchPrefecturesData = async () => {
       try {
         const response = await fetch('/api/prefecture')
         if (!response.ok) {
           throw new Error('Failed to fetch data')
         }
-        const prefecturesData = await response.json()
-        prefecturesData && setPrefectures(prefecturesData)
+        return (await response.json()) as Prefecture[]
       } catch (error) {
         console.error(error)
       }
     }
 
-    getPrefecturesData()
+    fetchPrefecturesData().then((prefecturesData) => {
+      if (prefecturesData) setPrefectures(prefecturesData)
+    })
   }, [])
 
   const handleCheckBoxChange = (
