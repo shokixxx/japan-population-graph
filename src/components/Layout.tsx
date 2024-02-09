@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Prefecture } from '../pages/api/prefecture'
 import layout from '../styles/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
-import CheckBox from './CheckBox'
+import { CheckBox } from './CheckBox'
 import Header from './Header'
 import PopulationChart from './PopulationChart'
 
