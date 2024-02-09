@@ -37,22 +37,26 @@ export default async function handler(
     return
   }
 
-  const populationRes = await fetch(
-    `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefCode as string}`,
-    {
-      method: 'GET',
-      headers: {
-        'X-API-KEY': apiKey,
-      },
+  try {
+    const populationRes = await fetch(
+      `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefCode as string}`,
+      {
+        method: 'GET',
+        headers: {
+          'X-API-KEY': apiKey,
+        },
+      }
+    )
+
+    if (!populationRes.ok) {
+      res.status(populationRes.status)
+      return
     }
-  )
 
-  if (!populationRes.ok) {
-    res.status(populationRes.status)
-    return
+    const populationCompositionByPrefecturesData: PopulationCompositionResponse =
+      await populationRes.json()
+    res.status(200).json(populationCompositionByPrefecturesData.result)
+  } catch (error) {
+    res.status(500)
   }
-
-  const populationCompositionByPrefecturesData: PopulationCompositionResponse =
-    await populationRes.json()
-  res.status(200).json(populationCompositionByPrefecturesData.result)
 }
