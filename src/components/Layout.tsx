@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Prefecture } from '../pages/api/prefecture'
 import layout from '../styles/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
-import CheckBox from './CheckBox'
+import { CheckBox } from './CheckBox'
 import Header from './Header'
 import PopulationChart from './PopulationChart'
 
@@ -14,20 +14,21 @@ const App = () => {
   >([])
 
   useEffect(() => {
-    const getPrefecturesData = async () => {
+    const fetchPrefecturesData = async () => {
       try {
         const response = await fetch('/api/prefecture')
         if (!response.ok) {
           throw new Error('Failed to fetch data')
         }
-        const prefecturesData = await response.json()
-        prefecturesData && setPrefectures(prefecturesData)
+        return (await response.json()) as Prefecture[]
       } catch (error) {
         console.error(error)
       }
     }
 
-    getPrefecturesData()
+    fetchPrefecturesData().then((prefecturesData) => {
+      if (prefecturesData) setPrefectures(prefecturesData)
+    })
   }, [])
 
   const handleCheckBoxChange = (
@@ -35,16 +36,14 @@ const App = () => {
     prefName: string,
     isChecked: boolean
   ) => {
-    setSelectedPrefecturesData((prevSelectedPrefecturesData) => {
-      if (isChecked) {
-        return [...prevSelectedPrefecturesData, { prefCode, prefName }]
-      } else {
-        return prevSelectedPrefecturesData.filter(
-          (prevSelectedPrefectureData) =>
-            prevSelectedPrefectureData.prefCode !== prefCode
-        )
-      }
-    })
+    setSelectedPrefecturesData((prevSelectedPrefecturesData) =>
+      isChecked
+        ? [...prevSelectedPrefecturesData, { prefCode, prefName }]
+        : prevSelectedPrefecturesData.filter(
+            (prevSelectedPrefectureData) =>
+              prevSelectedPrefectureData.prefCode !== prefCode
+          )
+    )
   }
 
   return (
