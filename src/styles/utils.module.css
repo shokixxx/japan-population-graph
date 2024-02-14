@@ -28,3 +28,12 @@
   margin-right: 3px;
   transform: scale(1.4);
 }
+
+.pointerHover {
+  cursor: pointer;
+}
+
+.pointerHover:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}

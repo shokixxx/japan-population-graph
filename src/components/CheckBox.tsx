@@ -14,10 +14,13 @@ const CheckBox = (checkBoxProps: CheckBoxProps) => {
   }
 
   return (
-    <label className={`${layout.checkBoxMenu} ${utilStyles.textL}`}>
+    <label
+      className={`${layout.checkBoxMenu} ${utilStyles.textL} 
+    ${utilStyles.pointerHover} `}
+    >
       <input
         type="checkbox"
-        className={utilStyles.checkBox}
+        className={`${utilStyles.checkBox} ${utilStyles.pointerHover}`}
         checked={isChecked}
         onChange={handleCheckBoxChange}
       />
