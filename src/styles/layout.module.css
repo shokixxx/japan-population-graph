@@ -1,6 +1,8 @@
 .container {
+  display: flex;
   margin: 0 100px;
   max-width: 1200px;
+  align-items: center;
 }
 
 .header {
@@ -8,6 +10,7 @@
   color: #fff;
   margin: 0 auto;
   text-align: center;
+  width: auto;
 }
 
 .checkBoxMenu {
@@ -17,6 +20,7 @@
 .prefecture {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 .populationComposition {

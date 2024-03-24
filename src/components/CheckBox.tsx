@@ -7,17 +7,20 @@ type CheckBoxProps = {
   onChange: (isChecked: boolean) => void
 }
 
-const CheckBox = (checkBoxProps: CheckBoxProps) => {
+export const CheckBox = (checkBoxProps: CheckBoxProps) => {
   const { label, isChecked, onChange } = checkBoxProps
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.checked)
   }
 
   return (
-    <label className={`${layout.checkBoxMenu} ${utilStyles.textL}`}>
+    <label
+      className={`${layout.checkBoxMenu} ${utilStyles.textL} 
+    ${utilStyles.pointerHover} `}
+    >
       <input
         type="checkbox"
-        className={utilStyles.checkBox}
+        className={`${utilStyles.checkBox} ${utilStyles.pointerHover}`}
         checked={isChecked}
         onChange={handleCheckBoxChange}
       />
@@ -25,5 +28,3 @@ const CheckBox = (checkBoxProps: CheckBoxProps) => {
     </label>
   )
 }
-
-export default CheckBox

@@ -38,7 +38,9 @@ export default async function handler(
   }
 
   const populationRes = await fetch(
-    `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefCode as string}`,
+    `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${
+      prefCode as string
+    }`,
     {
       method: 'GET',
       headers: {
