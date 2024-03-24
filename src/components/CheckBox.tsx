@@ -7,7 +7,7 @@ type CheckBoxProps = {
   onChange: (isChecked: boolean) => void
 }
 
-const CheckBox = (checkBoxProps: CheckBoxProps) => {
+export const CheckBox = (checkBoxProps: CheckBoxProps) => {
   const { label, isChecked, onChange } = checkBoxProps
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.checked)
@@ -28,5 +28,3 @@ const CheckBox = (checkBoxProps: CheckBoxProps) => {
     </label>
   )
 }
-
-export default CheckBox
