@@ -37,3 +37,23 @@
   background-color: #f0f0f0;
   color: #333;
 }
+
+@media screen and (width <=768px) {
+  .headingL {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    font-weight: 400;
+  }
+
+  .headingM {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .textL {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+}

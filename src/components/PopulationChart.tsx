@@ -6,7 +6,7 @@ import {
 import { PopulationCompositionByPrefectures } from '../pages/api/population/[prefCode]'
 import { Prefecture } from '../pages/api/prefecture'
 import layout from '../styles/layout.module.css'
-import CheckBox from './CheckBox'
+import { CheckBox } from './CheckBox'
 
 type PopulationChartProps = {
   selectedPrefecturesData: Prefecture[]
